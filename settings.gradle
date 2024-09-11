@@ -1,0 +1,3 @@
+rootProject.name = 'Api-Gateway'
+include 'eureka-server', 'common', 'student-service', 'card-service', 'api-gateway'
+
