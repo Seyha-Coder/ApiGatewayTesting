@@ -11,6 +11,7 @@ spring:
       httpclient:
         connect-timeout: 20000
         response-timeout: 10s
+#        ----request routing
       routes:
         - id: card-service
           uri: lb://CARD-SERVICE
@@ -23,12 +24,17 @@ spring:
           uri: lb://STUDENT-SERVICE
           predicates:
             - Path=/api/v1/student/**, /student-service/v3/api-docs
-      #          filters:
-      #            - RewritePath=/student-service/(?<segment>.*), /api/v1/student/${segment}
+#                filters:
+#                  - RewritePath=/student-service/(?<segment>.*), /api/v1/student/${segment}
       default-filters:
         - name: DedupeResponseHeader
           args:
             strategy: RETAIN_FIRST
+      discovery:
+        locator:
+          lower-case-service-id: true
+#          ----auto mapping
+#          enabled: true
 
 springdoc:
   swagger-ui:
